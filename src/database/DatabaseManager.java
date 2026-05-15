@@ -2,8 +2,6 @@ package database;
 
 import java.sql.*;
 
-import java.sql.*;
-
 public final class DatabaseManager {
     private Connection connection;
     private final String url = "jdbc:mysql://localhost:3307/siegetd";

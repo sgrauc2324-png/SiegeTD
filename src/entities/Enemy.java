@@ -3,55 +3,22 @@ package entities;
 public class Enemy {
     private int x;
     private int y;
-    private int health;
-    private String direction;
-
-    public Enemy(int x, int y) {
-        this.x = x;
-        this.y = y;
-        this.health = 30;
-        this.direction = "NONE";
-    }
-
-    public void move(boolean up, boolean down, boolean left, boolean right) {
-        if (direction.equals("UP") && up) {
-            y--;
-            return;
-        }
-        if (direction.equals("DOWN") && down) {
-            y++;
-            return;
-        }
-        if (direction.equals("LEFT") && left) {
-            x--;
-            return;
-        }
-        if (direction.equals("RIGHT") && right) {
-            x++;
-            return;
-        }
-
-        if (up && !direction.equals("DOWN")) {
-            y--;
-            direction = "UP";
-        } else if (down && !direction.equals("UP")) {
-            y++;
-            direction = "DOWN";
-        } else if (left && !direction.equals("RIGHT")) {
-            x--;
-            direction = "LEFT";
-        } else if (right && !direction.equals("LEFT")) {
-            x++;
-            direction = "RIGHT";
-        }
-    }
+    private int health = 100;
 
     public int getX() {
         return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public int getY() {
         return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getHealth() {

@@ -1,47 +1,28 @@
 package entities;
 
 public class Tower {
-    private int price;
-    private int dmg;
-    private double fireRate;
-    private int range;
+    private int x;
+    private int y;
+    private int level = 1;
 
-    public Tower(int price, double dmg, double fireRate, double range) {
-        this.price = 100;
-        this.dmg = 10;
-        this.fireRate = 1.2;
-        this.range = 30;
+    public Tower(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public void shoot() {
+    public int getX() {
+        return x;
     }
 
-    public void build() {
+    public int getY() {
+        return y;
     }
 
-    public void remove() {
+    public int getLevel() {
+        return level;
     }
 
     public void upgrade() {
-        this.dmg += 5;
-        this.range += 10;
-        this.fireRate += 0.3;
-        this.price += 50;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getDmg() {
-        return dmg;
-    }
-
-    public double getFireRate() {
-        return fireRate;
-    }
-
-    public int getRange() {
-        return range;
+        level++;
     }
 }

@@ -4,39 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WaveManager {
-    private int waveNumber;
-    private List<Enemy> enemies;
+    private List<Enemy> enemies = new ArrayList<>();
 
-    public WaveManager() {
-        this.waveNumber = 0;
-        this.enemies = new ArrayList<>();
-    }
-
-    public void startNextWave(int enemyCount) {
-        waveNumber++;
+    public void startNextWave(int count) {
         enemies.clear();
-        for (int i = 0; i < enemyCount; i++) {
-            enemies.add(new Enemy(0, 0));
+        for (int i = 0; i < count; i++) {
+            enemies.add(new Enemy());
         }
-    }
-
-    public void update() {
-        for (int i = enemies.size() - 1; i >= 0; i--) {
-            if (enemies.get(i).getHealth() <= 0) {
-                enemies.remove(i);
-            }
-        }
-    }
-
-    public boolean isWaveFinished() {
-        return enemies.isEmpty();
-    }
-
-    public int getWaveNumber() {
-        return waveNumber;
     }
 
     public List<Enemy> getEnemies() {
         return enemies;
+    }
+
+    public void update() {
+        enemies.removeIf(e -> e.getHealth() <= 0);
+    }
+
+    public boolean isWaveFinished() {
+        return enemies.isEmpty();
     }
 }
