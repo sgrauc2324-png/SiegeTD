@@ -1,31 +1,17 @@
 package database;
 
-public final class User {
-    private final int id;
-    private final String username;
-    private int actualLevel;
+public class User {
+    private int id;
+    private String username;
+    private int level;
 
-    public User(int id, String username, int actualLevel) {
+    public User(int id, String username, int level) {
         this.id = id;
         this.username = username;
-        this.actualLevel = actualLevel;
+        this.level = level;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public int getActualLevel() {
-        return actualLevel;
-    }
-
-    public void updateLevel(int newLevel) {
-        if (newLevel > 0) {
-            this.actualLevel = newLevel;
-        }
-    }
+    public int getId() { return id; }
+    public String getUsername() { return username; }
+    public int getLevel() { return level; }
 }

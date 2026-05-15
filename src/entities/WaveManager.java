@@ -13,15 +13,15 @@ public class WaveManager {
         }
     }
 
-    public List<Enemy> getEnemies() {
-        return enemies;
-    }
-
     public void update() {
         enemies.removeIf(e -> e.getHealth() <= 0);
     }
 
     public boolean isWaveFinished() {
         return enemies.isEmpty();
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
     }
 }
