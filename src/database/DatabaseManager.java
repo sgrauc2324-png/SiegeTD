@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class DatabaseManager {
     private Connection connection;
@@ -46,5 +48,21 @@ public final class DatabaseManager {
             ps.setInt(2, userId);
             ps.executeUpdate();
         }
+    }
+
+    public List<String> getTopTimes(int level) throws SQLException {
+        List<String> times = new ArrayList<>();
+        String sql = "SELECT u.username, g.time FROM game g " +
+                "JOIN users u ON g.user_id = u.id " +
+                "WHERE g.level = ? ORDER BY g.time ASC LIMIT 3";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, level);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    times.add(rs.getString("username") + " - " + rs.getString("time"));
+                }
+            }
+        }
+        return times;
     }
 }

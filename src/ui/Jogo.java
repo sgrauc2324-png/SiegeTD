@@ -77,24 +77,45 @@ public class Jogo extends JFrame {
 
     private void levelSelector() {
         getContentPane().removeAll();
-        setLayout(new GridBagLayout());
-        JPanel pnlLevels = new JPanel(new GridLayout(3, 1, 20, 20));
-        JButton btnLvl1 = new JButton("Nivel 1");
-        JButton btnLvl2 = new JButton("Nivel 2");
-        JButton btnLvl3 = new JButton("Nivel 3");
+        setLayout(new BorderLayout());
 
-        int playerLevel = currentUser.getLevel();
-        btnLvl2.setEnabled(playerLevel >= 2);
-        btnLvl3.setEnabled(playerLevel >= 3);
+        JPanel pnlCenter = new JPanel(new GridLayout(1, 3, 20, 20));
+        pnlCenter.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        btnLvl1.addActionListener(e -> level1());
-        btnLvl2.addActionListener(e -> level2());
-        btnLvl3.addActionListener(e -> level3());
+        for (int i = 1; i <= 3; i++) {
+            final int levelNum = i;
+            JPanel pnlLvl = new JPanel(new BorderLayout(10, 10));
+            JButton btnLvl = new JButton("Nivel " + i);
+            btnLvl.setEnabled(currentUser.getLevel() >= i);
+            btnLvl.addActionListener(e -> {
+                if (levelNum == 1) level1();
+                else if (levelNum == 2) level2();
+                else level3();
+            });
 
-        pnlLevels.add(btnLvl1);
-        pnlLevels.add(btnLvl2);
-        pnlLevels.add(btnLvl3);
-        add(pnlLevels);
+            JTextArea txtRanking = new JTextArea();
+            txtRanking.setEditable(false);
+            txtRanking.setBackground(getBackground());
+            txtRanking.setFont(new Font("Monospaced", Font.PLAIN, 12));
+
+            try {
+                List<String> top = db.getTopTimes(i);
+                StringBuilder sb = new StringBuilder("TOP TIEMPOS:\n");
+                if (top.isEmpty()) sb.append("Sin datos");
+                for (String s : top) sb.append(s).append("\n");
+                txtRanking.setText(sb.toString());
+            } catch (SQLException ex) {
+                txtRanking.setText("Error ranking");
+            }
+
+            pnlLvl.add(btnLvl, BorderLayout.NORTH);
+            pnlLvl.add(new JScrollPane(txtRanking), BorderLayout.CENTER);
+            pnlCenter.add(pnlLvl);
+        }
+
+        add(new JLabel("Bienvenido, " + currentUser.getUsername(), SwingConstants.CENTER), BorderLayout.NORTH);
+        add(pnlCenter, BorderLayout.CENTER);
+
         revalidate();
         repaint();
     }
