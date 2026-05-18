@@ -210,9 +210,9 @@ public class Jogo extends JFrame {
                 super.paintComponent(g);
                 drawGrid(g);
                 g.setColor(Color.GRAY);
-                g.fillRect(0, 40, 700, 40);
-                g.fillRect(660, 40, 40, 200);
-                g.fillRect(200, 200, 500, 40);
+                g.fillRect(0, 40, 680, 40);
+                g.fillRect(640, 40, 40, 200);
+                g.fillRect(200, 200, 480, 40);
                 g.fillRect(200, 200, 40, 200);
                 g.fillRect(200, 360, 600, 40);
                 drawEntities(g);
@@ -222,8 +222,8 @@ public class Jogo extends JFrame {
         setupMouseListener(gamePanel);
         gameTimer = new Timer(20, e -> {
             for (Enemy en : wm.getEnemies()) {
-                if (en.getY() == 45 && en.getX() < 665) en.setX(en.getX() + 2);
-                else if (en.getX() >= 665 && en.getY() < 205) en.setY(en.getY() + 2);
+                if (en.getY() == 45 && en.getX() < 645) en.setX(en.getX() + 2);
+                else if (en.getX() >= 645 && en.getY() < 205) en.setY(en.getY() + 2);
                 else if (en.getY() >= 205 && en.getY() < 210 && en.getX() > 205) en.setX(en.getX() - 2);
                 else if (en.getX() <= 205 && en.getY() < 365) en.setY(en.getY() + 2);
                 else en.setX(en.getX() + 2);
